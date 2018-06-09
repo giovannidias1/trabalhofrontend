@@ -1,3 +1,4 @@
+import { RestService } from './rest.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -47,7 +48,7 @@ import { ClientsComponent } from './clients/clients.component';
     AppRoutingModule,
     LbdModule
   ],
-  providers: [],
+  providers: [RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
