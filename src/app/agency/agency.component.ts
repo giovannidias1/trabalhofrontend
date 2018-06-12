@@ -2,11 +2,11 @@ import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  selector: 'app-agency',
+  templateUrl: './agency.component.html',
+  styleUrls: ['./agency.component.scss']
 })
-export class ClientsComponent implements OnInit {
+export class AgencyComponent implements OnInit {
 
   constructor(
     public restService: RestService,
@@ -19,7 +19,6 @@ export class ClientsComponent implements OnInit {
   onSubmit(form) {
     console.log(form);
     const jsonPost = {};
-    jsonPost['cpf'] = form.value.cpfInput;
     jsonPost['nome'] = form.value.nomeInput;
     jsonPost['rua'] = form.value.ruaInput;
     jsonPost['bairro'] = form.value.bairroInput;
@@ -28,14 +27,13 @@ export class ClientsComponent implements OnInit {
     jsonPost['cep'] = form.value.cepInput;
     jsonPost['numero'] = form.value.numeroInput;
     jsonPost['telefone'] = form.value.numeroInput;
-    jsonPost['celular'] = form.value.numeroInput;
-    this.restService.post('clientes', jsonPost).subscribe(client => {
+    this.restService.post('agencia', jsonPost).subscribe(client => {
       try {
         if (this.isEmptyObject(client)) {
-          alert('Erro ao criar cliente!');
+          alert('Erro ao criar agencia!');
           return false;
         } else {
-          alert('Cliente criado!');
+          alert('Agência criado!');
 
         }
       } catch (err) {

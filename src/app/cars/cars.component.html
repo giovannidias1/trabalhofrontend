@@ -1,0 +1,75 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Criar Cliente</h4>
+          </div>
+          <div class="content">
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Placa</label>
+                    <input type="text" class="form-control" name="placaInput" placeholder="Placa..." required ngModel #placa="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Montadora</label>
+                    <input type="text" class="form-control" name="montadoraInput" placeholder="Montadora..." required ngModel #montadora="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="form-group">
+                    <label>Modelo</label>
+                    <input type="text" class="form-control" name="modeloInput" placeholder="Modelo..." required ngModel #modelo="ngModel">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Ano</label>
+                    <input type="text" class="form-control" name="anoInput" placeholder="Ano..." required ngModel #ano="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Valor Diaria</label>
+                    <input type="text" class="form-control" name="valorInput" placeholder="Valor..." required ngModel #valor="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label>Opicionais</label>
+                    <input type="text" class="form-control" name="optInput" placeholder="Cidade..." required ngModel #opt="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Agência</label>
+                    <ng-select [allowClear]="true" [items]="items"  (data)="refreshValue($event)" (selected)="selected($event)"
+                      (removed)="removed($event)" (typed)="typed($event)" placeholder="Sem agência selecionada....">
+                    </ng-select>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success btn-block btn-fill pull-right" style="margin-top: 30px" [disabled]="!form.valid">Criar</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

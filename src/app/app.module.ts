@@ -1,3 +1,5 @@
+import { CarsComponent } from './cars/cars.component';
+import { ListAgencyComponent } from './list-agency/list-agency.component';
 import { RestService } from './rest.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -22,6 +24,12 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { ClientsComponent } from './clients/clients.component';
+import { ListClientsComponent } from './list-clients/list-clients.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { AgencyComponent } from './agency/agency.component';
+import { SelectModule } from 'ng2-select';
+
+
 
 @NgModule({
   declarations: [
@@ -34,7 +42,11 @@ import { ClientsComponent } from './clients/clients.component';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    ClientsComponent
+    ClientsComponent,
+    ListClientsComponent,
+    AgencyComponent,
+    ListAgencyComponent,
+    CarsComponent
 
   ],
   imports: [
@@ -46,7 +58,9 @@ import { ClientsComponent } from './clients/clients.component';
     SidebarModule,
     RouterModule,
     AppRoutingModule,
-    LbdModule
+    LbdModule,
+    Ng2SmartTableModule,
+    SelectModule
   ],
   providers: [RestService],
   bootstrap: [AppComponent]

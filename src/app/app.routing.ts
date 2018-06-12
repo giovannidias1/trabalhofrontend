@@ -1,3 +1,6 @@
+import { CarsComponent } from './cars/cars.component';
+import { AgencyComponent } from './agency/agency.component';
+import { ListClientsComponent } from './list-clients/list-clients.component';
 import { ClientsComponent } from './clients/clients.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
@@ -12,8 +15,13 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+import { ListAgencyComponent } from './list-agency/list-agency.component';
 
 const routes: Routes = [
+  { path: 'cars', component: CarsComponent },
+  { path: 'listAgency', component: ListAgencyComponent },
+  { path: 'agency', component: AgencyComponent },
+  { path: 'listClients', component: ListClientsComponent },
   { path: 'clients', component: ClientsComponent },
   { path: 'dashboard', component: HomeComponent },
   { path: 'user', component: UserComponent },

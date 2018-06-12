@@ -18,7 +18,8 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "assets/sass/light-bootstrap-dashboard.scss"
+        "assets/sass/light-bootstrap-dashboard.scss",
+        "assets/css/ng2-select.css"
       ],
       "scripts": [
           "../node_modules/jquery/dist/jquery.js",
