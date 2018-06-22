@@ -1,12 +1,13 @@
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-list-agency',
-  templateUrl: './list-agency.component.html',
-  styleUrls: ['./list-agency.component.scss']
+  selector: 'app-list-cars',
+  templateUrl: './list-cars.component.html',
+  styleUrls: ['./list-cars.component.scss']
 })
-export class ListAgencyComponent implements OnInit {
+export class ListCarsComponent implements OnInit {
   settings = {
     delete: {
       confirmDelete: true,
@@ -15,11 +16,11 @@ export class ListAgencyComponent implements OnInit {
       id: {
         title: 'ID'
       },
-      nome: {
-        title: 'Nome'
+      placa: {
+        title: 'Placa'
       },
-      rua: {
-        title: 'Rua'
+      modelo: {
+        title: 'Agência'
       },
     },
     actions: {
@@ -27,21 +28,21 @@ export class ListAgencyComponent implements OnInit {
       edit: false,
       delete: true
     }
-
   };
   data = [];
   constructor(
     public restService: RestService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getAgency();
+    this.getCars();
   }
 
-  getAgency() {
-    this.restService.get('agencia?status=true').subscribe(client => {
-      console.log(client);
-      this.data = client;
+  getCars() {
+    this.restService.get('carros?status=true').subscribe(cars => {
+      console.log(cars);
+      this.data = cars;
     });
   }
   onDeleteConfirm(event) {
@@ -59,7 +60,7 @@ export class ListAgencyComponent implements OnInit {
   deleteClient(id) {
     const jsonPost = {};
     jsonPost['status'] = false;
-    this.restService.put('agencia/' + id, jsonPost).subscribe(client => {
+    this.restService.put('carros/' + id, jsonPost).subscribe(client => {
       console.log(client);
       this.data = client;
     });

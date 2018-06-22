@@ -1,3 +1,7 @@
+import { RentalComponent } from './rental/rental.component';
+import { EmployersComponent } from './employers/employers.component';
+import { ListEmployersComponent } from './list-employers/list-employers.component';
+import { ListCarsComponent } from './list-cars/list-cars.component';
 import { CarsComponent } from './cars/cars.component';
 import { ListAgencyComponent } from './list-agency/list-agency.component';
 import { RestService } from './rest.service';
@@ -46,7 +50,11 @@ import { SelectModule } from 'ng2-select';
     ListClientsComponent,
     AgencyComponent,
     ListAgencyComponent,
-    CarsComponent
+    CarsComponent,
+    ListCarsComponent,
+    ListEmployersComponent,
+    EmployersComponent,
+    RentalComponent
 
   ],
   imports: [

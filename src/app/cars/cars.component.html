@@ -56,11 +56,11 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Agência</label>
-                    <ng-select [allowClear]="true" [items]="items"  (data)="refreshValue($event)" (selected)="selected($event)"
-                      (removed)="removed($event)" (typed)="typed($event)" placeholder="Sem agência selecionada....">
-                    </ng-select>
+                  <div class="form-class">
+                    <select class="form-control" name="selectIdAgency" ngModel #idAgency="ngModel"  required>
+                      <option value="">Selecione a agência...</option>
+                      <option [ngValue]="agency.id" *ngFor="let agency of itemsAgency">{{agency.nome}} - {{agency.cidade}}/{{agency.estado}}</option>
+                    </select>
                   </div>
                 </div>
               </div>

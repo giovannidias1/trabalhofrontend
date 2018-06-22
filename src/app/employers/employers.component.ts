@@ -1,15 +1,14 @@
+import { Router } from '@angular/router';
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-cars',
-  templateUrl: './cars.component.html',
-  styleUrls: ['./cars.component.scss']
+  selector: 'app-employers',
+  templateUrl: './employers.component.html',
+  styleUrls: ['./employers.component.scss']
 })
-export class CarsComponent implements OnInit {
-
-  private itemsAgency: any;
+export class EmployersComponent implements OnInit {
+  itemsAgency: any;
 
   constructor(
     public restService: RestService,
@@ -23,31 +22,29 @@ export class CarsComponent implements OnInit {
   onSubmit(form) {
     console.log(form);
     const jsonPost = {};
-    jsonPost['placa'] = form.value.placaInput;
-    jsonPost['montadora'] = form.value.montadoraInput;
-    jsonPost['modelo'] = form.value.modeloInput;
-    jsonPost['ano'] = form.value.anoInput;
-    jsonPost['valorDiaria'] = form.value.valorInput;
-    jsonPost['opicionais'] = form.value.optInput;
+    jsonPost['cpts'] = form.value.cptsInput;
+    jsonPost['nome'] = form.value.nomeInput;
+    jsonPost['cargo'] = form.value.cargoInput;
+    jsonPost['telefone'] = form.value.telefoneInput;
     jsonPost['agencia'] = form.value.selectIdAgency;
+    jsonPost['status'] = true;
 
-    this.restService.post('carros', jsonPost).subscribe(client => {
+    this.restService.post('funcionario', jsonPost).subscribe(employee => {
       try {
-        if (this.isEmptyObject(client)) {
-          alert('Erro ao criar carro!');
+        if (this.isEmptyObject(employee)) {
+          alert('Erro ao criar funcionario!');
           return false;
         } else {
-          alert('Carro criado!');
-          this.router.navigate(['/listCars']);
+          alert('Funcionario criado!');
+          this.router.navigate(['/listEmployers']);
+
         }
       } catch (err) {
         console.log(err);
       }
-      console.log(client);
+      console.log(employee);
     });
   }
-
-
   public isEmptyObject(obj) {
     for (var prop in obj) {
       if (obj.hasOwnProperty(prop)) {

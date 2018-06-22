@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,6 +11,7 @@ export class AgencyComponent implements OnInit {
 
   constructor(
     public restService: RestService,
+    public router: Router
 
   ) { }
 
@@ -34,6 +36,8 @@ export class AgencyComponent implements OnInit {
           return false;
         } else {
           alert('Agência criado!');
+          this.router.navigate(['/listAgency']);
+
 
         }
       } catch (err) {

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,6 +11,7 @@ export class ClientsComponent implements OnInit {
 
   constructor(
     public restService: RestService,
+    public router: Router
 
   ) { }
 
@@ -29,6 +31,8 @@ export class ClientsComponent implements OnInit {
     jsonPost['numero'] = form.value.numeroInput;
     jsonPost['telefone'] = form.value.numeroInput;
     jsonPost['celular'] = form.value.numeroInput;
+    jsonPost['status'] = true;
+
     this.restService.post('clientes', jsonPost).subscribe(client => {
       try {
         if (this.isEmptyObject(client)) {
@@ -36,6 +40,7 @@ export class ClientsComponent implements OnInit {
           return false;
         } else {
           alert('Cliente criado!');
+          this.router.navigate(['/listClients']);
 
         }
       } catch (err) {

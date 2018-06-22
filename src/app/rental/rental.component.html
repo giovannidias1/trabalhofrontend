@@ -1,0 +1,45 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Criar Agência</h4>
+          </div>
+          <div class="content">
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Data Inicial</label>
+                    <input type="text" class="form-control" name="startDateInput" placeholder="Data inicial..." required ngModel #startDate="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Data Final</label>
+                    <input type="text" class="form-control" name="endDateInput" placeholder="Data final..." required ngModel #endDate="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-class">
+                    <select class="form-control" name="selectIdAgency" ngModel #idAgency="ngModel" required>
+                      <option value="">Selecione a agência...</option>
+                      <option [ngValue]="agency.id" *ngFor="let agency of itemsAgency">{{agency.nome}} - {{agency.cidade}}/{{agency.estado}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success btn-block btn-fill pull-right" [disabled]="!form.valid">Criar</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

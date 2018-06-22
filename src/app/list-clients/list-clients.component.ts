@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListClientsComponent implements OnInit {
   settings = {
+    delete: {
+      confirmDelete: true,
+    },
     columns: {
       id: {
         title: 'ID'
@@ -19,8 +22,11 @@ export class ListClientsComponent implements OnInit {
         title: 'CPF'
       },
     },
-    actions: false
-
+    actions: {
+      add: false,
+      edit: false,
+      delete: true
+    }
   };
   data = [];
   constructor(
@@ -32,10 +38,32 @@ export class ListClientsComponent implements OnInit {
   }
 
   getClients() {
-    this.restService.get('clientes').subscribe(client => {
+    this.restService.get('clientes?status=true').subscribe(client => {
       console.log(client);
       this.data = client;
     });
   }
+
+  onDeleteConfirm(event) {
+    console.log(event);
+    if (window.confirm('Você tem certeza que quer deletar?')) {
+      this.deleteClient(event.data.id);
+      event.confirm.resolve(
+        this.deleteClient(event.data.id)
+      );
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  deleteClient(id) {
+    const jsonPost = {};
+    jsonPost['status'] = false;
+    this.restService.put('clientes/' + id, jsonPost).subscribe(client => {
+      console.log(client);
+      this.data = client;
+    });
+  }
+
 
 }

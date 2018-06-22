@@ -1,0 +1,62 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Criar Cliente</h4>
+          </div>
+          <div class="content">
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>CPTS</label>
+                    <input type="text" class="form-control" name="cptsInput" placeholder="CPTS..." required ngModel #cpts="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" name="nomeInput" placeholder="Nome..." required ngModel #name="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Cargo</label>
+                    <input type="text" class="form-control" name="cargoInput" placeholder="Cargo..." required ngModel #cargo="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="number" class="form-control" name="telefoneInput" placeholder="Telefone..." max-length="8" required ngModel
+                      #telefone="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-class">
+                    <select class="form-control" name="selectIdAgency" ngModel #idAgency="ngModel" required>
+                      <option value="">Selecione a agência...</option>
+                      <option [ngValue]="agency.id" *ngFor="let agency of itemsAgency">{{agency.nome}} - {{agency.cidade}}/{{agency.estado}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success btn-block btn-fill pull-right" [disabled]="!form.valid">Criar</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

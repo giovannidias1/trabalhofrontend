@@ -2,11 +2,11 @@ import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-list-agency',
-  templateUrl: './list-agency.component.html',
-  styleUrls: ['./list-agency.component.scss']
+  selector: 'app-list-employers',
+  templateUrl: './list-employers.component.html',
+  styleUrls: ['./list-employers.component.scss']
 })
-export class ListAgencyComponent implements OnInit {
+export class ListEmployersComponent implements OnInit {
   settings = {
     delete: {
       confirmDelete: true,
@@ -18,8 +18,8 @@ export class ListAgencyComponent implements OnInit {
       nome: {
         title: 'Nome'
       },
-      rua: {
-        title: 'Rua'
+      cpts: {
+        title: 'CPTS'
       },
     },
     actions: {
@@ -27,7 +27,6 @@ export class ListAgencyComponent implements OnInit {
       edit: false,
       delete: true
     }
-
   };
   data = [];
   constructor(
@@ -35,13 +34,13 @@ export class ListAgencyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAgency();
+    this.getEmployers();
   }
 
-  getAgency() {
-    this.restService.get('agencia?status=true').subscribe(client => {
-      console.log(client);
-      this.data = client;
+  getEmployers() {
+    this.restService.get('funcionario?status=true').subscribe(employers => {
+      console.log(employers);
+      this.data = employers;
     });
   }
   onDeleteConfirm(event) {
@@ -59,7 +58,7 @@ export class ListAgencyComponent implements OnInit {
   deleteClient(id) {
     const jsonPost = {};
     jsonPost['status'] = false;
-    this.restService.put('agencia/' + id, jsonPost).subscribe(client => {
+    this.restService.put('funcionario/' + id, jsonPost).subscribe(client => {
       console.log(client);
       this.data = client;
     });
