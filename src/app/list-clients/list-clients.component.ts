@@ -11,9 +11,13 @@ export class ListClientsComponent implements OnInit {
     delete: {
       confirmDelete: true,
     },
+    edit: {
+      confirmSave: true,
+    },
     columns: {
       id: {
-        title: 'ID'
+        title: 'ID',
+        editable: false
       },
       cpf: {
         title: 'CPF'
@@ -79,11 +83,10 @@ export class ListClientsComponent implements OnInit {
       event.confirm.reject();
     }
   }
-  onEditConfirm(event) {
-    console.log(event);
+  updateRecord(event) {
+    console.log('event update');
     if (window.confirm('Você tem certeza que quer alterar?')) {
-      event.confirm.resolve(
-      );
+      event.confirm.resolve();
     } else {
       event.confirm.reject();
     }
