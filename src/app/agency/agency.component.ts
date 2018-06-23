@@ -29,6 +29,8 @@ export class AgencyComponent implements OnInit {
     jsonPost['cep'] = form.value.cepInput;
     jsonPost['numero'] = form.value.numeroInput;
     jsonPost['telefone'] = form.value.numeroInput;
+    jsonPost['status'] = true;
+
     this.restService.post('agencia', jsonPost).subscribe(client => {
       try {
         if (this.isEmptyObject(client)) {

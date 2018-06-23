@@ -56,7 +56,7 @@ export class EmployersComponent implements OnInit {
   }
 
   getAgency() {
-    this.restService.get('agencia').subscribe(agency => {
+    this.restService.get('agencia?status=true').subscribe(agency => {
       console.log(agency);
       this.itemsAgency = agency;
       console.log(this.itemsAgency);

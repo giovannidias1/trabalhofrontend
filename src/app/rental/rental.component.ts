@@ -12,6 +12,7 @@ export class RentalComponent implements OnInit {
   itemsCars: any;
   itemsEmployee: any;
   itemsAgency: any;
+  minDate: Date;
 
   constructor(
     public restService: RestService,
@@ -22,17 +23,21 @@ export class RentalComponent implements OnInit {
   ngOnInit() {
     this.getAgency();
     this.getClient();
-    this.getCar();
-    this.getEmployee();
+    this.minDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() - 1);
+  }
+  onChangeSelect(idAgency) {
+    this.getCar(idAgency);
+    this.getEmployee(idAgency);
   }
   onSubmit(form) {
     console.log(form);
     const jsonPost = {};
-    jsonPost['dataDevolucao'] = form.value.nomeInput;
-    jsonPost['dataLocacao'] = form.value.ruaInput;
-    jsonPost['cliente'] = form.value.selectClient;
-    jsonPost['carro'] = form.value.selectCar;
-    jsonPost['realizaAluguel'] = form.value.selectEmployee;
+    jsonPost['dataDevolucao'] = form.value.endDateInput;
+    jsonPost['dataLocacao'] = form.value.startDateInput;
+    jsonPost['cliente'] = form.value.cpfInput;
+    jsonPost['carro'] = form.value.selectIdCar;
+    jsonPost['realizaAluguel'] = form.value.selectIdEmployee;
 
     this.restService.post('aluga', jsonPost).subscribe(rent => {
       try {
@@ -61,7 +66,7 @@ export class RentalComponent implements OnInit {
     return true;
   }
   getAgency() {
-    this.restService.get('agencia').subscribe(agency => {
+    this.restService.get('agencia?status=true').subscribe(agency => {
       console.log(agency);
       this.itemsAgency = agency;
       console.log(this.itemsAgency);
@@ -69,22 +74,23 @@ export class RentalComponent implements OnInit {
   }
 
   getClient() {
-    this.restService.get('clientes').subscribe(client => {
+    this.restService.get('clientes?status=true').subscribe(client => {
       console.log(client);
       this.itemsClient = client;
       console.log(this.itemsClient);
     });
   }
 
-  getCar() {
-    this.restService.get('carros').subscribe(cars => {
+  getCar(idAgency) {
+    this.restService.get('carros?status=true&agencia=' + idAgency).subscribe(cars => {
       console.log(cars);
       this.itemsCars = cars;
+      console.log('this.itemsCars');
       console.log(this.itemsCars);
     });
   }
-  getEmployee() {
-    this.restService.get('funcionario').subscribe(employee => {
+  getEmployee(idAgency) {
+    this.restService.get('funcionario?status=true&agencia=' + idAgency).subscribe(employee => {
       console.log(employee);
       this.itemsEmployee = employee;
       console.log(this.itemsEmployee);

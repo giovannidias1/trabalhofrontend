@@ -15,16 +15,40 @@ export class ListClientsComponent implements OnInit {
       id: {
         title: 'ID'
       },
+      cpf: {
+        title: 'CPF'
+      },
       nome: {
         title: 'Nome'
       },
-      cpf: {
-        title: 'CPF'
+      rua: {
+        title: 'Rua'
+      },
+      bairro: {
+        title: 'Bairro'
+      },
+      cidade: {
+        title: 'Cidade'
+      },
+      estado: {
+        title: 'Estado'
+      },
+      cep: {
+        title: 'CEP'
+      },
+      numero: {
+        title: 'Numero'
+      },
+      telefone: {
+        title: 'Tel'
+      },
+      celular: {
+        title: 'Cel'
       },
     },
     actions: {
       add: false,
-      edit: false,
+      edit: true,
       delete: true
     }
   };
@@ -50,6 +74,15 @@ export class ListClientsComponent implements OnInit {
       this.deleteClient(event.data.id);
       event.confirm.resolve(
         this.deleteClient(event.data.id)
+      );
+    } else {
+      event.confirm.reject();
+    }
+  }
+  onEditConfirm(event) {
+    console.log(event);
+    if (window.confirm('Você tem certeza que quer alterar?')) {
+      event.confirm.resolve(
       );
     } else {
       event.confirm.reject();

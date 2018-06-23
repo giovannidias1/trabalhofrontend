@@ -18,6 +18,7 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { LbdModule } from './lbd/lbd.module';
 
 import { AppComponent } from './app.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
@@ -68,7 +69,8 @@ import { SelectModule } from 'ng2-select';
     AppRoutingModule,
     LbdModule,
     Ng2SmartTableModule,
-    SelectModule
+    SelectModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [RestService],
   bootstrap: [AppComponent]

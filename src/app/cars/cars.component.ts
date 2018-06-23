@@ -30,6 +30,8 @@ export class CarsComponent implements OnInit {
     jsonPost['valorDiaria'] = form.value.valorInput;
     jsonPost['opicionais'] = form.value.optInput;
     jsonPost['agencia'] = form.value.selectIdAgency;
+    jsonPost['status'] = true;
+
 
     this.restService.post('carros', jsonPost).subscribe(client => {
       try {
@@ -59,7 +61,7 @@ export class CarsComponent implements OnInit {
   }
 
   getAgency() {
-    this.restService.get('agencia').subscribe(agency => {
+    this.restService.get('agencia?status=true').subscribe(agency => {
       console.log(agency);
       this.itemsAgency = agency;
       console.log(this.itemsAgency);
