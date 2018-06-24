@@ -11,9 +11,13 @@ export class ListEmployersComponent implements OnInit {
     delete: {
       confirmDelete: true,
     },
+    edit: {
+      confirmSave: true,
+    },
     columns: {
       id: {
-        title: 'ID'
+        title: 'ID',
+        editabke: false
       },
       nome: {
         title: 'Nome'
@@ -21,10 +25,16 @@ export class ListEmployersComponent implements OnInit {
       cpts: {
         title: 'CPTS'
       },
+      telefone: {
+        title: 'Tel'
+      },
+      cargo: {
+        title: 'Cargo'
+      },
     },
     actions: {
       add: false,
-      edit: false,
+      edit: true,
       delete: true
     }
   };
@@ -46,21 +56,51 @@ export class ListEmployersComponent implements OnInit {
   onDeleteConfirm(event) {
     console.log(event);
     if (window.confirm('Você tem certeza que quer deletar?')) {
-      this.deleteClient(event.data.id);
       event.confirm.resolve(
-        this.deleteClient(event.data.id)
+        this.deleteEmployee(event.data.id)
       );
     } else {
       event.confirm.reject();
     }
   }
+  updateRecord(event) {
+    return new Promise((resolve, reject) => {
+      console.log('f1');
+      console.log('event update');
+      if (window.confirm('Você tem certeza que quer alterar?')) {
+        event.confirm.resolve(
+          this.updateEmployee(event.newData)
+        );
+      } else {
+        event.confirm.reject();
+      }
+      resolve();
+    });
 
-  deleteClient(id) {
+  }
+  updateEmployee(data) {
+    console.log('data');
+    console.log(data);
+    const jsonPost = {};
+    const id = data.id;
+    jsonPost['cpts'] = data.cpts;
+    jsonPost['nome'] = data.nome;
+    jsonPost['telefone'] = data.telefone;
+    jsonPost['cargo'] = data.cargo;
+    this.restService.put('funcionario/' + id, jsonPost).subscribe(employee => {
+      console.log('employee');
+      console.log(employee);
+      this.data = employee;
+      this.getEmployers();
+    });
+  }
+
+  deleteEmployee(id) {
     const jsonPost = {};
     jsonPost['status'] = false;
-    this.restService.put('funcionario/' + id, jsonPost).subscribe(client => {
-      console.log(client);
-      this.data = client;
+    this.restService.put('funcionario/' + id, jsonPost).subscribe(employee => {
+      console.log(employee);
+      this.data = employee;
     });
   }
 

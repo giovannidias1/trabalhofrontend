@@ -84,12 +84,19 @@ export class ListClientsComponent implements OnInit {
     }
   }
   updateRecord(event) {
-    console.log('event update');
-    if (window.confirm('Você tem certeza que quer alterar?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
+    return new Promise((resolve, reject) => {
+      console.log('f1');
+      console.log('event update');
+      if (window.confirm('Você tem certeza que quer alterar?')) {
+        event.confirm.resolve(
+          this.updateClient(event.newData)
+        );
+      } else {
+        event.confirm.reject();
+      }
+      resolve();
+    });
+
   }
 
   deleteClient(id) {
@@ -98,6 +105,28 @@ export class ListClientsComponent implements OnInit {
     this.restService.put('clientes/' + id, jsonPost).subscribe(client => {
       console.log(client);
       this.data = client;
+    });
+  }
+  updateClient(data) {
+    console.log('data');
+    console.log(data);
+    const jsonPost = {};
+    const id = data.id;
+    jsonPost['cpf'] = data.cpf;
+    jsonPost['nome'] = data.nome;
+    jsonPost['rua'] = data.rua;
+    jsonPost['bairro'] = data.bairro;
+    jsonPost['cidade'] = data.cidade;
+    jsonPost['estado'] = data.estado;
+    jsonPost['cep'] = data.cep;
+    jsonPost['numero'] = data.numero;
+    jsonPost['telefone'] = data.telefone;
+    jsonPost['celular'] = data.telefone;
+    this.restService.put('clientes/' + id, jsonPost).subscribe(client => {
+      console.log('client');
+      console.log(client);
+      this.data = client;
+      this.getClients();
     });
   }
 

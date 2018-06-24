@@ -9,11 +9,14 @@
           <div class="content">
             <form #form="ngForm" (ngSubmit)="onSubmit(form)">
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10">
                   <div class="form-group">
                     <label>CPF</label>
                     <input type="text" class="form-control" name="cpfInput" placeholder="CPF..." required ngModel #cpf="ngModel">
                   </div>
+                </div>
+                <div class="col-md-2" style="padding-top: 30px">
+                  <button type="button" class="btn btn-success btn-block btn-fill pull-right" [disabled]="!cpf.value" (click)="searchClient(cpf.value)">Buscar Cliente</button>
                 </div>
               </div>
               <div class="row">

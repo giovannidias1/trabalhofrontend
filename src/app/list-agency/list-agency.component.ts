@@ -11,9 +11,13 @@ export class ListAgencyComponent implements OnInit {
     delete: {
       confirmDelete: true,
     },
+    edit: {
+      confirmSave: true,
+    },
     columns: {
       id: {
-        title: 'ID'
+        title: 'ID',
+        editable: false
       },
       nome: {
         title: 'Nome'
@@ -21,10 +25,29 @@ export class ListAgencyComponent implements OnInit {
       rua: {
         title: 'Rua'
       },
+      numero: {
+        title: 'Numero'
+      },
+      bairro: {
+        title: 'Bairo'
+      },
+      cidade: {
+        title: 'Cidade'
+      },
+      estado: {
+        title: 'Estado'
+      },
+      cep: {
+        title: 'Cep'
+      },
+      telefone: {
+        title: 'telefone'
+      },
+
     },
     actions: {
       add: false,
-      edit: false,
+      edit: true,
       delete: true
     }
 
@@ -64,5 +87,41 @@ export class ListAgencyComponent implements OnInit {
       this.data = client;
     });
   }
+  updateRecord(event) {
+    return new Promise((resolve, reject) => {
+      console.log('f1');
+      console.log('event update');
+      if (window.confirm('Você tem certeza que quer alterar?')) {
+        event.confirm.resolve(
+          this.updateAgency(event.newData)
+        );
+      } else {
+        event.confirm.reject();
+      }
+      resolve();
+    });
+
+  }
+  updateAgency(data) {
+    console.log('data');
+    console.log(data);
+    const jsonPost = {};
+    const id = data.id;
+    jsonPost['nome'] = data.nome;
+    jsonPost['rua'] = data.rua;
+    jsonPost['bairro'] = data.bairro;
+    jsonPost['cidade'] = data.cidade;
+    jsonPost['estado'] = data.estado;
+    jsonPost['cep'] = data.cep;
+    jsonPost['numero'] = data.numero;
+    jsonPost['telefone'] = data.telefone;
+    this.restService.put('agencia/' + id, jsonPost).subscribe(agency => {
+      console.log('cars');
+      console.log(agency);
+      this.data = agency;
+      this.getAgency();
+    });
+  }
+
 
 }

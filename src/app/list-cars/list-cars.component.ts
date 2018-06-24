@@ -12,20 +12,36 @@ export class ListCarsComponent implements OnInit {
     delete: {
       confirmDelete: true,
     },
+    edit: {
+      confirmSave: true,
+    },
     columns: {
       id: {
-        title: 'ID'
+        title: 'ID',
+        editable: false
       },
       placa: {
         title: 'Placa'
       },
+      montadora: {
+        title: 'Montadora'
+      },
       modelo: {
-        title: 'Agência'
+        title: 'Modelo'
+      },
+      ano: {
+        title: 'Ano'
+      },
+      valorDiaria: {
+        title: 'Valor Diaria'
+      },
+      opcionais: {
+        title: 'Opcionais'
       },
     },
     actions: {
       add: false,
-      edit: false,
+      edit: true,
       delete: true
     }
   };
@@ -63,6 +79,40 @@ export class ListCarsComponent implements OnInit {
     this.restService.put('carros/' + id, jsonPost).subscribe(client => {
       console.log(client);
       this.data = client;
+    });
+  }
+
+  updateRecord(event) {
+    return new Promise((resolve, reject) => {
+      console.log('f1');
+      console.log('event update');
+      if (window.confirm('Você tem certeza que quer alterar?')) {
+        event.confirm.resolve(
+          this.updateCars(event.newData)
+        );
+      } else {
+        event.confirm.reject();
+      }
+      resolve();
+    });
+
+  }
+  updateCars(data) {
+    console.log('data');
+    console.log(data);
+    const jsonPost = {};
+    const id = data.id;
+    jsonPost['placa'] = data.placa;
+    jsonPost['monotadora'] = data.montadora;
+    jsonPost['modelo'] = data.modelo;
+    jsonPost['ano'] = data.ano;
+    jsonPost['valorDiaria'] = data.valorDiaria;
+    jsonPost['opcionais'] = data.opcionais;
+    this.restService.put('carros/' + id, jsonPost).subscribe(cars => {
+      console.log('cars');
+      console.log(cars);
+      this.data = cars;
+      this.getCars();
     });
   }
 

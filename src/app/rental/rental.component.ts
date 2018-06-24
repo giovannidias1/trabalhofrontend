@@ -22,7 +22,6 @@ export class RentalComponent implements OnInit {
 
   ngOnInit() {
     this.getAgency();
-    this.getClient();
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate() - 1);
   }
@@ -32,29 +31,36 @@ export class RentalComponent implements OnInit {
   }
   onSubmit(form) {
     console.log(form);
-    const jsonPost = {};
-    jsonPost['dataDevolucao'] = form.value.endDateInput;
-    jsonPost['dataLocacao'] = form.value.startDateInput;
-    jsonPost['cliente'] = form.value.cpfInput;
-    jsonPost['carro'] = form.value.selectIdCar;
-    jsonPost['realizaAluguel'] = form.value.selectIdEmployee;
+    if (this.isEmptyObject(this.itemsClient)) {
+      alert('CPF do cliente não cadastrado');
+    } else {
+      const jsonPost = {};
+      jsonPost['dataDevolucao'] = form.value.endDateInput;
+      jsonPost['dataLocacao'] = form.value.startDateInput;
+      jsonPost['cliente'] = this.itemsClient[0].id;
+      jsonPost['carro'] = form.value.selectIdCar;
+      jsonPost['realizaAluguel'] = form.value.selectIdEmployee;
+      console.log('this.itemsClient.id');
+      console.log(this.itemsClient[0].id);
 
-    this.restService.post('aluga', jsonPost).subscribe(rent => {
-      try {
-        if (this.isEmptyObject(rent)) {
-          alert('Erro ao criar agencia!');
-          return false;
-        } else {
-          alert('Agência criado!');
-          this.router.navigate(['/dashboard']);
+      this.restService.post('aluga', jsonPost).subscribe(rent => {
+        try {
+          if (this.isEmptyObject(rent)) {
+            alert('Erro ao criar agencia!');
+            return false;
+          } else {
+            alert('Agência criado!');
+            this.router.navigate(['/dashboard']);
 
 
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
-      }
-      console.log(rent);
-    });
+        console.log(rent);
+      });
+    }
+
   }
   public isEmptyObject(obj) {
     for (var prop in obj) {
@@ -73,11 +79,19 @@ export class RentalComponent implements OnInit {
     });
   }
 
-  getClient() {
-    this.restService.get('clientes?status=true').subscribe(client => {
+  searchClient(cpf) {
+    this.getClient(cpf);
+  }
+
+  getClient(cpf) {
+    this.restService.get('clientes?status=true&cpf=' + cpf).subscribe(client => {
       console.log(client);
       this.itemsClient = client;
+      console.log('this.itemsClient');
       console.log(this.itemsClient);
+      return true;
+    }, (err) => {
+      return false;
     });
   }
 

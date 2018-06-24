@@ -7,7 +7,7 @@
             <h4 class="title">Agências</h4>
             <p class="category">Aqui estão todas as agências</p>
           </div>
-          <ng2-smart-table [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
+          <ng2-smart-table [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="updateRecord($event)"></ng2-smart-table>
 
         </div>
       </div>
