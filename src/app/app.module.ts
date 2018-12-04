@@ -1,3 +1,4 @@
+import { AuthGuard } from './authGuard';
 import { RentalComponent } from './rental/rental.component';
 import { EmployersComponent } from './employers/employers.component';
 import { ListEmployersComponent } from './list-employers/list-employers.component';
@@ -33,6 +34,7 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AgencyComponent } from './agency/agency.component';
 import { SelectModule } from 'ng2-select';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 
@@ -55,7 +57,8 @@ import { SelectModule } from 'ng2-select';
     ListCarsComponent,
     ListEmployersComponent,
     EmployersComponent,
-    RentalComponent
+    RentalComponent,
+    LoginPageComponent
 
   ],
   imports: [
@@ -72,7 +75,7 @@ import { SelectModule } from 'ng2-select';
     SelectModule,
     BsDatepickerModule.forRoot()
   ],
-  providers: [RestService],
+  providers: [RestService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,5 @@
+import { AuthGuard } from './authGuard';
+import { LoginPageComponent } from './login-page/login-page.component';
 import { ListEmployersComponent } from './list-employers/list-employers.component';
 import { EmployersComponent } from './employers/employers.component';
 import { ListCarsComponent } from './list-cars/list-cars.component';
@@ -22,23 +24,18 @@ import { ListAgencyComponent } from './list-agency/list-agency.component';
 import { RentalComponent } from './rental/rental.component';
 
 const routes: Routes = [
-  { path: 'cars', component: CarsComponent },
-  { path: 'listCars', component: ListCarsComponent },
-  { path: 'listAgency', component: ListAgencyComponent },
-  { path: 'agency', component: AgencyComponent },
+  { path: 'cars', component: CarsComponent, canActivate: [AuthGuard]},
+  { path: 'listCars', component: ListCarsComponent, canActivate: [AuthGuard]},
+  { path: 'listAgency', component: ListAgencyComponent, canActivate: [AuthGuard]},
+  { path: 'agency', component: AgencyComponent, canActivate: [AuthGuard]},
   { path: 'listClients', component: ListClientsComponent },
-  { path: 'clients', component: ClientsComponent },
-  { path: 'employers', component: EmployersComponent },
-  { path: 'listEmployers', component: ListEmployersComponent },
-  { path: 'rental', component: RentalComponent },
-  { path: 'dashboard', component: HomeComponent },
-  { path: 'user', component: UserComponent },
-  { path: 'table', component: TablesComponent },
-  { path: 'typography', component: TypographyComponent },
-  { path: 'icons', component: IconsComponent },
-  { path: 'maps', component: MapsComponent },
-  { path: 'notifications', component: NotificationsComponent },
-  { path: 'upgrade', component: UpgradeComponent },
+  { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
+  { path: 'employers', component: EmployersComponent, canActivate: [AuthGuard]},
+  { path: 'listEmployers', component: ListEmployersComponent, canActivate: [AuthGuard]},
+  { path: 'rental', component: RentalComponent, canActivate: [AuthGuard]},
+  { path: 'login', component: LoginPageComponent },
+  { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard]},
+
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];

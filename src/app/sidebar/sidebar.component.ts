@@ -32,12 +32,14 @@ export const ROUTES: RouteInfo[] = [
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html'
 })
+
 export class SidebarComponent implements OnInit {
     menuItems: any[];
-
+    user: any;
     constructor() { }
 
     ngOnInit() {
+        this.user = JSON.parse(localStorage.getItem("employeeLogin"));
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
     isMobileMenu() {
@@ -46,4 +48,13 @@ export class SidebarComponent implements OnInit {
         }
         return true;
     };
+
+    isEmployee() {
+        if (this.user.cargo === 2) {
+            return true
+        }else{
+
+            return false
+        }
+    }
 }

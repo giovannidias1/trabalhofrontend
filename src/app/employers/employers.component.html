@@ -19,6 +19,14 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="emailInput" placeholder="Email..." required ngModel #email="ngModel" email>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label>Nome</label>
                     <input type="text" class="form-control" name="nomeInput" placeholder="Nome..." required ngModel #name="ngModel">
                   </div>
@@ -26,9 +34,12 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Cargo</label>
-                    <input type="text" class="form-control" name="cargoInput" placeholder="Cargo..." required ngModel #cargo="ngModel">
+                  <div class="form-class">
+                    <select class="form-control" name="selectCargo" ngModel #cargo="ngModel" required>
+                      <option value="">Cargo...</option>
+                      <option [ngValue]="1" >Funcionario</option>
+                      <option [ngValue]="2">Gerente</option>
+                    </select>
                   </div>
                 </div>
               </div>

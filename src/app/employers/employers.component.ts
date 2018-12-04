@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployersComponent implements OnInit {
   itemsAgency: any;
+  user: any;
 
   constructor(
     public restService: RestService,
@@ -17,19 +18,26 @@ export class EmployersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem("employeeLogin"));
+    if (this.user.cargo == 1){
+      this.router.navigate(['/dashboard']);
+    }
     this.getAgency();
   }
   onSubmit(form) {
     console.log(form);
-    const jsonPost = {};
-    jsonPost['cpts'] = form.value.cptsInput;
-    jsonPost['nome'] = form.value.nomeInput;
-    jsonPost['cargo'] = form.value.cargoInput;
-    jsonPost['telefone'] = form.value.telefoneInput;
-    jsonPost['agencia'] = form.value.selectIdAgency;
-    jsonPost['status'] = true;
+    const params = {};
+    params['cpts'] = form.value.cptsInput;
+    params['email'] = form.value.emailInput;
+    params['nome'] = form.value.nomeInput;
+    params['password'] = this.generatePassword();
+    params['cargo'] = form.value.selectCargo;
+    params['telefone'] = form.value.telefoneInput;
+    params['agencia'] = form.value.selectIdAgency;
+    params['status'] = true;
+    this.restService.post('funcionario', params).subscribe(employee => {
+      console.log(params);
 
-    this.restService.post('funcionario', jsonPost).subscribe(employee => {
       try {
         if (this.isEmptyObject(employee)) {
           alert('Erro ao criar funcionario!');
@@ -61,6 +69,10 @@ export class EmployersComponent implements OnInit {
       this.itemsAgency = agency;
       console.log(this.itemsAgency);
     });
+  }
+
+   generatePassword() {
+    return Math.random().toString(36).slice(-8);
   }
 
 }

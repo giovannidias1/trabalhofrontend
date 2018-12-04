@@ -1,0 +1,37 @@
+<div class="main-content ">
+    <div class="overlay"></div>
+
+  <div class="container-fluid ">
+    <div class="row" style="margin-top: 200px">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Login</h4>
+          </div>
+          <div class="content">
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="emailInput" placeholder="Email..." required ngModel #email="ngModel" email>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" class="form-control" name="senhaInput" placeholder="Senha..." required ngModel #senha="ngModel">
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-info btn-block btn-fill pull-right" style="margin-top: 30px" [disabled]="!form.valid">Entrar</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

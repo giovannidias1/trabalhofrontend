@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit{
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    user: any;
 
     constructor(location: Location,  private element: ElementRef) {
       this.location = location;
@@ -20,6 +21,9 @@ export class NavbarComponent implements OnInit{
     }
 
     ngOnInit(){
+
+      this.user = JSON.parse(localStorage.getItem("employeeLogin"));
+      console.log(this.user)
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
@@ -59,5 +63,10 @@ export class NavbarComponent implements OnInit{
           }
       }
       return 'Dashboard';
+    }
+
+    logout(){
+        localStorage.removeItem("employeeLogin");
+        window.location.href="/login";
     }
 }

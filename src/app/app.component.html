@@ -1,13 +1,13 @@
-<div class="wrapper">
-    <div class="sidebar" data-color="red" data-image="">
+<div class="wrapper" [class.wrapper]="isMap('login')">
+    <div class="sidebar" *ngIf="isMap('login')" data-color="red" data-image="">
         <app-sidebar></app-sidebar>
         <div class="sidebar-background" style="background-image: url(/assets/img/sidebar-5.jpg)"></div>
     </div>
 
-    <div class="main-panel">
-        <navbar-cmp></navbar-cmp>
+    <div class="main-panel" [class.main-panel]="isMap('login')">
+        <navbar-cmp *ngIf="isMap('login')"></navbar-cmp>
         <router-outlet></router-outlet>
-        <div *ngIf="isMap('maps')">
+        <div *ngIf="isMap('login')">
             <footer-cmp></footer-cmp>
         </div>
     </div>

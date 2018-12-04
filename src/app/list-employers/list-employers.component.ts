@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -39,12 +40,19 @@ export class ListEmployersComponent implements OnInit {
     }
   };
   data = [];
+  user: any;
   constructor(
     public restService: RestService,
+    public router: Router
+
   ) { }
 
   ngOnInit() {
     this.getEmployers();
+    this.user = JSON.parse(localStorage.getItem("employeeLogin"));
+    if (this.user.cargo == 1){
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   getEmployers() {
