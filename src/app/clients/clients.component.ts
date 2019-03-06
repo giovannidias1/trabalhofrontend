@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
+import { NgxViacepService, Endereco, ErroCep, ErrorValues } from '@brunoc/ngx-viacep';
 
 @Component({
   selector: 'app-clients',
@@ -9,31 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
+  ativado: boolean;
+
   constructor(
     public restService: RestService,
-    public router: Router
+    public router: Router,
+    private viacep: NgxViacepService
 
   ) { }
 
   ngOnInit() {
-
   }
   onSubmit(form) {
     console.log(form);
     const jsonPost = {};
-    jsonPost['cpf'] = form.value.cpfInput;
-    jsonPost['nome'] = form.value.nomeInput;
-    jsonPost['rua'] = form.value.ruaInput;
-    jsonPost['bairro'] = form.value.bairroInput;
-    jsonPost['cidade'] = form.value.cidadeInput;
-    jsonPost['estado'] = form.value.estadoInput;
+    jsonPost['name'] = form.value.nameInput;
+    jsonPost['lastName'] = form.value.lastNameInput;
+    jsonPost['street'] = form.value.streetInput;
+    jsonPost['neighborhood'] = form.value.neighborhoodInput;
+    jsonPost['state'] = form.value.stateInput;
+    jsonPost['city'] = form.value.cityInput;
     jsonPost['cep'] = form.value.cepInput;
-    jsonPost['numero'] = form.value.numeroInput;
-    jsonPost['telefone'] = form.value.numeroInput;
-    jsonPost['celular'] = form.value.numeroInput;
-    jsonPost['status'] = true;
+    jsonPost['number'] = form.value.numberImput;
+    jsonPost['phone'] = form.value.phoneInput;
+    jsonPost['cellphone'] = form.value.cellphoneInput;
+    jsonPost['deleted'] = false;
 
-    this.restService.post('clientes', jsonPost).subscribe(client => {
+    this.restService.post('Client', jsonPost).subscribe(client => {
       try {
         if (this.isEmptyObject(client)) {
           alert('Erro ao criar cliente!');
@@ -57,6 +60,32 @@ export class ClientsComponent implements OnInit {
     }
 
     return true;
+  }
+
+  getCep(value, form) {
+    this.viacep.buscarPorCep(value).then((endereco: Endereco) => {
+      console.log(endereco);
+     this.populateValues(form, endereco);
+    }).catch((error: ErroCep) => {
+      // Alguma coisa deu errado :/
+      console.log(error.message);
+      alert(error.message);
+    });
+  }
+
+  populateValues(form, endereco) {
+    form.setValue({
+      cellphoneInput: form.value.cellphoneInput,
+      cepInput: 17064090,
+      cityInput: endereco.localidade,
+      lastNameInput: form.value.lastNameInput,
+      nameInput: form.value.nameInput,
+      neighborhoodInput: endereco.bairro,
+      numberImput: form.value.numberImput,
+      phoneInput: form.value.phoneInput,
+      stateInput: endereco.uf,
+      streetInput: endereco.logradouro,
+    })
   }
 
 }

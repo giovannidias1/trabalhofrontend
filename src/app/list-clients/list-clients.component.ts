@@ -19,34 +19,31 @@ export class ListClientsComponent implements OnInit {
         title: 'ID',
         editable: false
       },
-      cpf: {
-        title: 'CPF'
-      },
-      nome: {
+      name: {
         title: 'Nome'
       },
-      rua: {
+      street: {
         title: 'Rua'
       },
-      bairro: {
+      neighborhood: {
         title: 'Bairro'
       },
-      cidade: {
+      city: {
         title: 'Cidade'
       },
-      estado: {
+      state: {
         title: 'Estado'
       },
       cep: {
         title: 'CEP'
       },
-      numero: {
+      number: {
         title: 'Numero'
       },
-      telefone: {
+      phone: {
         title: 'Tel'
       },
-      celular: {
+      cellphone: {
         title: 'Cel'
       },
     },
@@ -66,7 +63,7 @@ export class ListClientsComponent implements OnInit {
   }
 
   getClients() {
-    this.restService.get('clientes?status=true').subscribe(client => {
+    this.restService.get('client?deleted=false').subscribe(client => {
       console.log(client);
       this.data = client;
     });
@@ -101,8 +98,8 @@ export class ListClientsComponent implements OnInit {
 
   deleteClient(id) {
     const jsonPost = {};
-    jsonPost['status'] = false;
-    this.restService.put('clientes/' + id, jsonPost).subscribe(client => {
+    jsonPost['deleted'] = true;
+    this.restService.put('client/' + id, jsonPost).subscribe(client => {
       console.log(client);
       this.data = client;
     });

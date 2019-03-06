@@ -18,25 +18,25 @@ export class EmployersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("employeeLogin"));
-    if (this.user.cargo == 1){
-      this.router.navigate(['/dashboard']);
-    }
-    this.getAgency();
+
   }
   onSubmit(form) {
     console.log(form);
-    const params = {};
-    params['cpts'] = form.value.cptsInput;
-    params['email'] = form.value.emailInput;
-    params['nome'] = form.value.nomeInput;
-    params['password'] = this.generatePassword();
-    params['cargo'] = form.value.selectCargo;
-    params['telefone'] = form.value.telefoneInput;
-    params['agencia'] = form.value.selectIdAgency;
-    params['status'] = true;
-    this.restService.post('funcionario', params).subscribe(employee => {
-      console.log(params);
+    const jsonPost = {};
+    jsonPost['name'] = form.value.nameInput;
+    jsonPost['lastName'] = form.value.lastNameInput;
+    jsonPost['email'] = form.value.emailInput;
+    jsonPost['street'] = form.value.streetInput;
+    jsonPost['neighborhood'] = form.value.neighborhoodInput;
+    jsonPost['state'] = form.value.stateInput;
+    jsonPost['city'] = form.value.cityInput;
+    jsonPost['cep'] = form.value.cepInput;
+    jsonPost['number'] = form.value.numberImput;
+    jsonPost['phone'] = form.value.phoneInput;
+    jsonPost['cellphone'] = form.value.cellphoneInput;
+    jsonPost['deleted'] = false;
+    this.restService.post('employee', jsonPost).subscribe(employee => {
+      console.log(jsonPost);
 
       try {
         if (this.isEmptyObject(employee)) {
@@ -63,13 +63,7 @@ export class EmployersComponent implements OnInit {
     return true;
   }
 
-  getAgency() {
-    this.restService.get('agencia?status=true').subscribe(agency => {
-      console.log(agency);
-      this.itemsAgency = agency;
-      console.log(this.itemsAgency);
-    });
-  }
+
 
    generatePassword() {
     return Math.random().toString(36).slice(-8);

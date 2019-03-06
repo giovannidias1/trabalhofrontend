@@ -21,13 +21,11 @@ export class RentalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAgency();
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate() - 1);
   }
   onChangeSelect(idAgency) {
-    this.getCar(idAgency);
-    this.getEmployee(idAgency);
+
   }
   onSubmit(form) {
     console.log(form);
@@ -35,9 +33,9 @@ export class RentalComponent implements OnInit {
       alert('CPF do cliente não cadastrado');
     } else {
       const jsonPost = {};
-      jsonPost['dataDevolucao'] = form.value.endDateInput;
-      jsonPost['dataLocacao'] = form.value.startDateInput;
-      jsonPost['cliente'] = this.itemsClient[0].id;
+      jsonPost['attendanceDate'] = form.value.endDateInput;
+      jsonPost['executionDate'] = form.value.startDateInput;
+      jsonPost['statusOrder'] = this.itemsClient[0].id;
       jsonPost['carro'] = form.value.selectIdCar;
       jsonPost['realizaAluguel'] = form.value.selectIdEmployee;
       console.log('this.itemsClient.id');
@@ -71,13 +69,7 @@ export class RentalComponent implements OnInit {
 
     return true;
   }
-  getAgency() {
-    this.restService.get('agencia?status=true').subscribe(agency => {
-      console.log(agency);
-      this.itemsAgency = agency;
-      console.log(this.itemsAgency);
-    });
-  }
+
 
   searchClient(cpf) {
     this.getClient(cpf);
@@ -95,20 +87,5 @@ export class RentalComponent implements OnInit {
     });
   }
 
-  getCar(idAgency) {
-    this.restService.get('carros?status=true&agencia=' + idAgency).subscribe(cars => {
-      console.log(cars);
-      this.itemsCars = cars;
-      console.log('this.itemsCars');
-      console.log(this.itemsCars);
-    });
-  }
-  getEmployee(idAgency) {
-    this.restService.get('funcionario?status=true&agencia=' + idAgency).subscribe(employee => {
-      console.log(employee);
-      this.itemsEmployee = employee;
-      console.log(this.itemsEmployee);
-    });
-  }
 
 }

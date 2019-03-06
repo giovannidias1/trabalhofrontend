@@ -11,52 +11,16 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label>CPF</label>
-                    <input type="text" class="form-control" name="cpfInput" placeholder="CPF..." required ngModel #cpf="ngModel">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
                     <label>Nome</label>
-                    <input type="text" class="form-control" name="nomeInput" placeholder="Nome..." required ngModel #name="ngModel">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-10">
-                  <div class="form-group">
-                    <label>Rua</label>
-                    <input type="text" class="form-control" name="ruaInput" placeholder="Rua..." required ngModel #rua="ngModel">
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="form-group">
-                    <label>Numero</label>
-                    <input type="text" class="form-control" name="numeroInput" placeholder="Numero..." required ngModel #numero="ngModel">
+                    <input type="text" class="form-control" name="nameInput" placeholder="Nome..." required ngModel #name="ngModel">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label>Bairro</label>
-                    <input type="text" class="form-control" name="bairroInput" placeholder="Bairro..." required ngModel #bairro="ngModel">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-8">
-                      <div class="form-group">
-                        <label>Cidade</label>
-                        <input type="text" class="form-control" name="cidadeInput" placeholder="Cidade..." required ngModel #cidade="ngModel">
-                      </div>
-                    </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Estado</label>
-                    <input type="text" class="form-control" name="estadoInput" placeholder="Estado..." required ngModel #estado="ngModel">
+                    <label>Sobrenome</label>
+                    <input type="text" class="form-control" name="lastNameInput" placeholder="Sobrenome..." required ngModel #lastName="ngModel">
                   </div>
                 </div>
               </div>
@@ -64,15 +28,52 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>CEP</label>
-                    <input type="number" class="form-control" name="cepInput" placeholder="CEP..." required ngModel #cep="ngModel">
+                    <input type="number" class="form-control" name="cepInput" placeholder="CEP..." required ngModel #cep="ngModel" (blur)="getCep($event.target.value, form)">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="form-group">
+                    <label>Rua</label>
+                    <input type="text" class="form-control" name="streetInput" placeholder="Rua..." required ngModel #street="ngModel">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Numero</label>
+                    <input type="text" class="form-control" name="numberImput" placeholder="Numero..." required ngModel #number="ngModel">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" name="neighborhoodInput" placeholder="Bairro..." required ngModel #neighborhood="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-8">
+                      <div class="form-group">
+                        <label>Cidade</label>
+                        <input type="text" class="form-control" name="cityInput" placeholder="Cidade..." required ngModel #city="ngModel">
+                      </div>
+                    </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Estado</label>
+                    <input type="text" class="form-control" name="stateInput" placeholder="Estado..." required ngModel #state="ngModel">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label>Telefone</label>
-                    <input type="number" class="form-control" name="telefoneInput" placeholder="Telefone..." max-length="8" required ngModel #telefone="ngModel">
+                    <input type="number" class="form-control" name="phoneInput" placeholder="Telefone..." max-length="8" required ngModel #phone="ngModel">
                   </div>
                 </div>
               </div>
@@ -80,8 +81,8 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Celular</label>
-                    <input type="number" class="form-control" name="celularInput" placeholder="Celular(opcional)..." max-length="9" required ngModel
-                      #celular="ngModel">
+                    <input type="number" class="form-control" name="cellphoneInput" placeholder="Celular(opcional)..." max-length="9" required ngModel
+                      #cellphone="ngModel">
                   </div>
                 </div>
               </div>

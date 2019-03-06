@@ -2,9 +2,6 @@ import { AuthGuard } from './authGuard';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ListEmployersComponent } from './list-employers/list-employers.component';
 import { EmployersComponent } from './employers/employers.component';
-import { ListCarsComponent } from './list-cars/list-cars.component';
-import { CarsComponent } from './cars/cars.component';
-import { AgencyComponent } from './agency/agency.component';
 import { ListClientsComponent } from './list-clients/list-clients.component';
 import { ClientsComponent } from './clients/clients.component';
 import { NgModule } from '@angular/core';
@@ -20,23 +17,18 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
-import { ListAgencyComponent } from './list-agency/list-agency.component';
 import { RentalComponent } from './rental/rental.component';
 
 const routes: Routes = [
-  { path: 'cars', component: CarsComponent, canActivate: [AuthGuard]},
-  { path: 'listCars', component: ListCarsComponent, canActivate: [AuthGuard]},
-  { path: 'listAgency', component: ListAgencyComponent, canActivate: [AuthGuard]},
-  { path: 'agency', component: AgencyComponent, canActivate: [AuthGuard]},
   { path: 'listClients', component: ListClientsComponent },
-  { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
-  { path: 'employers', component: EmployersComponent, canActivate: [AuthGuard]},
-  { path: 'listEmployers', component: ListEmployersComponent, canActivate: [AuthGuard]},
-  { path: 'rental', component: RentalComponent, canActivate: [AuthGuard]},
+  { path: 'clients', component: ClientsComponent},
+  { path: 'employers', component: EmployersComponent},
+  { path: 'listEmployers', component: ListEmployersComponent},
+  { path: 'orderService', component: RentalComponent},
   { path: 'login', component: LoginPageComponent },
-  { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: HomeComponent},
 
-
+  //canActivate: [AuthGuard]
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
