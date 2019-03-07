@@ -4,15 +4,40 @@
       <div class="col-md-8">
         <div class="card">
           <div class="header">
-            <h4 class="title">Alugar</h4>
+            <h4 class="title">O.S</h4>
           </div>
           <div class="content">
             <form #form="ngForm" (ngSubmit)="onSubmit(form)">
               <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <ng-select
+                      [allowClear]="true"
+                      [items]="listClient" 
+                      placeholder="Selecione o cliente"
+                      name="clientSelect"
+                      required
+                      ngModel
+                      #client="ngModel"
+                    >
+                    </ng-select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-xs-12 col-12 col-md-4 form-group">
                   <input
                     type="text"
-                    placeholder="Datepicker"
+                    placeholder="Data Pedido "
+                    class="form-control"
+                    bsDatepicker
+                    required
+                  />
+                </div>
+                <div class="col-xs-12 col-12 col-md-4 form-group">
+                  <input
+                    type="text"
+                    placeholder="Data Orçamento"
                     class="form-control"
                     bsDatepicker
                   />
@@ -20,133 +45,13 @@
                 <div class="col-xs-12 col-12 col-md-4 form-group">
                   <input
                     type="text"
-                    placeholder="Daterangepicker"
+                    placeholder="Data Execução"
                     class="form-control"
-                    bsDaterangepicker
+                    bsDatepicker
                   />
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-10">
-                  <div class="form-group">
-                    <label>CPF</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="cpfInput"
-                      placeholder="CPF..."
-                      required
-                      ngModel
-                      #cpf="ngModel"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-2" style="padding-top: 30px">
-                  <button
-                    type="button"
-                    class="btn btn-success btn-block btn-fill pull-right"
-                    [disabled]="!cpf.value"
-                    (click)="searchClient(cpf.value)"
-                  >
-                    Buscar Cliente
-                  </button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-12 col-md-6">
-                  <div class="form-group">
-                    <label>Data Inicial</label>
-                    <input
-                      type="text"
-                      placeholder="Data inicial"
-                      name="startDateInput"
-                      class="form-control"
-                      bsDatepicker
-                      required
-                      ngModel
-                      #startDate="ngModel"
-                      [minDate]="minDate"
-                    />
-                  </div>
-                </div>
-                <div class="col-xs-12 col-12 col-md-6">
-                  <div class="form-group">
-                    <label>Data Final</label>
-                    <input
-                      type="text"
-                      placeholder="Data inicial"
-                      name="endDateInput"
-                      class="form-control"
-                      bsDatepicker
-                      required
-                      ngModel
-                      #endDate="ngModel"
-                      [minDate]="minDate"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-class">
-                    <select
-                      class="form-control"
-                      name="selectIdAgency"
-                      ngModel
-                      #idAgency="ngModel"
-                      required
-                      (change)="onChangeSelect(idAgency.value)"
-                    >
-                      <option value="">Selecione a agência...</option>
-                      <option
-                        [ngValue]="agency?.id"
-                        *ngFor="let agency of itemsAgency"
-                        >{{ agency.nome }} - {{ agency.cidade }}/{{
-                          agency.estado
-                        }}</option
-                      >
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row" *ngIf="idAgency.value">
-                <div class="col-md-12">
-                  <div class="form-class">
-                    <select
-                      class="form-control"
-                      name="selectIdCar"
-                      ngModel
-                      #idAgency="ngModel"
-                      required
-                    >
-                      <option value="">Selecione o carro...</option>
-                      <option [ngValue]="car.id" *ngFor="let car of itemsCars"
-                        >{{ car.montadora }} - {{ car.modelo }}</option
-                      >
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row" *ngIf="idAgency.value">
-                <div class="col-md-12">
-                  <div class="form-class">
-                    <select
-                      class="form-control"
-                      name="selectIdEmployee"
-                      ngModel
-                      #idAgency="ngModel"
-                      required
-                    >
-                      <option value="">Selecione o funcionario...</option>
-                      <option
-                        [ngValue]="employee.id"
-                        *ngFor="let employee of itemsEmployee"
-                        >{{ employee.nome }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+
               <button
                 type="submit"
                 class="btn btn-success btn-block btn-fill pull-right"

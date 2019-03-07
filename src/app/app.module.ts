@@ -31,6 +31,8 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { SelectModule } from 'ng2-select';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { NgxSelectModule } from 'ngx-select-ex';
+
 
 
 
@@ -66,6 +68,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     Ng2SmartTableModule,
     SelectModule,
     NgxViacepModule,
+    NgxSelectModule,
     BsDatepickerModule.forRoot()
   ],
   providers: [RestService, AuthGuard],

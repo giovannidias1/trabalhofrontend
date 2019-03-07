@@ -1,6 +1,8 @@
 import { Router } from '@angular/router';
 import { RestService } from './../rest.service';
 import { Component, OnInit } from '@angular/core';
+import {INgxSelectOption} from 'ngx-select-ex';
+
 
 @Component({
   selector: 'app-rental',
@@ -13,6 +15,7 @@ export class RentalComponent implements OnInit {
   itemsEmployee: any;
   itemsAgency: any;
   minDate: Date;
+  clients: any;
 
   constructor(
     public restService: RestService,
@@ -23,6 +26,7 @@ export class RentalComponent implements OnInit {
   ngOnInit() {
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate() - 1);
+    this.getClient();
   }
   onChangeSelect(idAgency) {
 
@@ -36,8 +40,11 @@ export class RentalComponent implements OnInit {
       jsonPost['attendanceDate'] = form.value.endDateInput;
       jsonPost['executionDate'] = form.value.startDateInput;
       jsonPost['statusOrder'] = this.itemsClient[0].id;
-      jsonPost['carro'] = form.value.selectIdCar;
-      jsonPost['realizaAluguel'] = form.value.selectIdEmployee;
+      jsonPost['brand'] = form.value.selectIdCar;
+      jsonPost['model'] = form.value.selectIdEmployee;
+      jsonPost['defect'] = form.value.selectIdEmployee;
+      jsonPost['obs'] = form.value.selectIdEmployee;
+
       console.log('this.itemsClient.id');
       console.log(this.itemsClient[0].id);
 
@@ -69,14 +76,14 @@ export class RentalComponent implements OnInit {
 
     return true;
   }
-
-
-  searchClient(cpf) {
-    this.getClient(cpf);
+  get listClient() {
+    return this.itemsClient ? this.itemsClient.map(item => {
+      return { id: item.id, text: (item.street + ' / ' + item.name + ' ' + item.lastName)};
+    }) : [];
   }
 
-  getClient(cpf) {
-    this.restService.get('clientes?status=true&cpf=' + cpf).subscribe(client => {
+  getClient() {
+    this.restService.get('client?deleted=false').subscribe(client => {
       console.log(client);
       this.itemsClient = client;
       console.log('this.itemsClient');
