@@ -32,6 +32,7 @@
                     class="form-control"
                     bsDatepicker
                     required
+                    [bsValue]="bsValue"
                   />
                 </div>
                 <div class="col-xs-12 col-12 col-md-4 form-group">
@@ -51,12 +52,43 @@
                   />
                 </div>
               </div>
-
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" name="selectBrand" ngModel #brand="ngModel" required>
+                          <option value="">Selecione a marca...</option>
+                          <option [ngValue]="brand.id" *ngFor="let brand of brandItems">{{brand.name}}</option>
+                        </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Modelo</label>
+                        <input type="text" class="form-control" name="modelInput" placeholder="Modelo..." required ngModel #model="ngModel">
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Defeito</label>
+                        <input type="text" class="form-control" name="defectInput" placeholder="Defeito..." required ngModel #model="ngModel">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                          <label>Observação</label>
+                          <textarea type="text" class="form-control" name="obsInput" placeholder="Observação..." required ngModel #obs="ngModel"></textarea>
+                      </div>
+                    </div>
+                  </div>
               <button
                 type="submit"
                 class="btn btn-success btn-block btn-fill pull-right"
-                [disabled]="!form.valid"
-              >
+                [disabled]="!form.valid">
                 Criar
               </button>
               <div class="clearfix"></div>
