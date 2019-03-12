@@ -4,10 +4,10 @@
         <div class="col-md-12">
           <div class="card">
             <div class="header">
-              <h4 class="title">Alugueis</h4>
+              <h4 class="title">Ordens de serviço</h4>
               <p class="category">Aqui estão todos os alugueis</p>
             </div>
-            <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+            <ng2-smart-table [settings]="settings" [source]="data" (userRowSelect)="openModel($event)"	></ng2-smart-table>
   
           </div>
         </div>

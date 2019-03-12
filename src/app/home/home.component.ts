@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
+import { DatePipe } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-home',
@@ -17,34 +20,51 @@ export class HomeComponent implements OnInit {
         title: 'ID',
         editable: false
       },
-      dataDevolucao: {
-        title: 'Data devolução'
-      },
-      dataLocacao: {
-        title: 'Data locação'
-      },
-      cliente: {
-        title: 'Cliente',
-        valuePrepareFunction: (cliente) => {
-          return cliente.nome;
+      owner: {
+        title: 'Endereço',
+        valuePrepareFunction: (owner) => {
+          return owner.street;
         }
       },
 
-      carro: {
-        title: 'Carro',
-        valuePrepareFunction: (carro) => {
-          return carro.montadora + ' - ' + carro.modelo;
+      orderDate: {
+        title: 'Data Pedido',
+        valuePrepareFunction: (orderDate) => {
+          const raw = new Date(orderDate);
+          const formatted = this.datePipe.transform(raw, 'dd/MM/yyyy');
+          return formatted;
         }
       },
-      realizaAluguel: {
-        title: 'Funcionario',
-        valuePrepareFunction: (realizaAluguel) => {
-          return realizaAluguel.nome;
+      attendanceDate: {
+        title: 'Data Orçamento',
+        valuePrepareFunction: (attendanceDate) => {
+          if(!attendanceDate){
+            return 'Sem data';
+          }else{
+            const raw = new Date(attendanceDate);
+            const formatted = this.datePipe.transform(raw, 'dd/MM/yyyy');
+            return formatted;
+
+          }
         }
       },
+      executionDate: {
+        title: 'Data Execução',
+        valuePrepareFunction: (executionDate) => {
+          if(!executionDate){
+            return 'Sem data';
+          }else{
+            const raw = new Date(executionDate);
+            const formatted = this.datePipe.transform(raw, 'dd/MM/yyyy');
+            return formatted;
 
+          }
+        }
+      },
+      statusOrder: {
+        title: 'Status da O.S',
 
-
+      }
     },
     actions: {
       add: false,
@@ -56,16 +76,23 @@ export class HomeComponent implements OnInit {
   data = [];
   constructor(
     public restService: RestService,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit() {
-    this.getRental();
+    this.getOs();
   }
 
-  getRental() {
-    this.restService.get('aluga').subscribe(rent => {
-      this.data = rent;
+  getOs() {
+    this.restService.get('OrderService').subscribe(os => {
+      this.data = os;
+      console.log(this.data);
     });
   }
+  openModel(event) {
+    alert(event.data.id);
+    console.log(event);
+  }
+
 
 }

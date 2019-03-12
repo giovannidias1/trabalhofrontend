@@ -32,7 +32,7 @@
                     class="form-control"
                     bsDatepicker
                     required
-                    [bsValue]="bsValue"
+                    [(bsValue)]="bsValue"
                   />
                 </div>
                 <div class="col-xs-12 col-12 col-md-4 form-group">
@@ -41,6 +41,7 @@
                     placeholder="Data Orçamento"
                     class="form-control"
                     bsDatepicker
+                    name="attendanceDate" ngModel #attendanceDate="ngModel"
                   />
                 </div>
                 <div class="col-xs-12 col-12 col-md-4 form-group">
@@ -49,7 +50,23 @@
                     placeholder="Data Execução"
                     class="form-control"
                     bsDatepicker
+                    name="executionDateInput"  ngModel #executionDate="ngModel"
                   />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Status</label>
+                      <select class="form-control" name="selectStatus" ngModel #status="ngModel" required>
+                          <option  disabled="disabled" value="">Selecione a status...</option>
+                          <option value="1" >Finalizado</option>
+                          <option value="3" >Em andamento</option>
+                          <option value="2" >Em aguardar</option>
+                          <option value="3" >Cancelado</option>
+
+                        </select>
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -58,7 +75,7 @@
                       <label>Marca</label>
                       <select class="form-control" name="selectBrand" ngModel #brand="ngModel" required>
                           <option value="">Selecione a marca...</option>
-                          <option [ngValue]="brand.id" *ngFor="let brand of brandItems">{{brand.name}}</option>
+                          <option [ngValue]="brand.name" *ngFor="let brand of brandItems">{{brand.name}}</option>
                         </select>
                   </div>
                 </div>
@@ -70,10 +87,10 @@
                   </div>
               </div>
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="form-group">
                         <label>Defeito</label>
-                        <input type="text" class="form-control" name="defectInput" placeholder="Defeito..." required ngModel #model="ngModel">
+                        <input type="text" class="form-control" name="defectInput" placeholder="Defeito..." required ngModel #defect="ngModel">
                     </div>
                   </div>
                 </div>

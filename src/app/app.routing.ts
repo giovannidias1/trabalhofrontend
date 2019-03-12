@@ -17,14 +17,14 @@ import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
-import { RentalComponent } from './rental/rental.component';
+import { OsComponent } from './os/os.component';
 
 const routes: Routes = [
   { path: 'listClients', component: ListClientsComponent },
   { path: 'clients', component: ClientsComponent},
   { path: 'employers', component: EmployersComponent},
   { path: 'listEmployers', component: ListEmployersComponent},
-  { path: 'orderService', component: RentalComponent},
+  { path: 'orderService', component: OsComponent},
   { path: 'login', component: LoginPageComponent },
   { path: 'dashboard', component: HomeComponent},
 

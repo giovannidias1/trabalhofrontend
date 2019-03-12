@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { AuthGuard } from './authGuard';
-import { RentalComponent } from './rental/rental.component';
+import { OsComponent } from './os/os.component';
 import { EmployersComponent } from './employers/employers.component';
 import { ListEmployersComponent } from './list-employers/list-employers.component';
 import { RestService } from './rest.service';
@@ -16,7 +17,7 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { LbdModule } from './lbd/lbd.module';
 
 import { AppComponent } from './app.component';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, ButtonsModule } from 'ngx-bootstrap';
 import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
@@ -51,7 +52,7 @@ import { NgxSelectModule } from 'ngx-select-ex';
     ListClientsComponent,
     ListEmployersComponent,
     EmployersComponent,
-    RentalComponent,
+    OsComponent,
     LoginPageComponent
 
   ],
@@ -69,9 +70,10 @@ import { NgxSelectModule } from 'ngx-select-ex';
     SelectModule,
     NgxViacepModule,
     NgxSelectModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
-  providers: [RestService, AuthGuard],
+  providers: [RestService, AuthGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

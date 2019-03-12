@@ -1,15 +1,16 @@
 import { brands } from './brands';
 import { Router } from '@angular/router';
-import { RestService } from './../rest.service';
+import { RestService } from '../rest.service';
 import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: 'app-rental',
-  templateUrl: './rental.component.html',
-  styleUrls: ['./rental.component.scss']
+  selector: 'app-os',
+  templateUrl: './os.component.html',
+  styleUrls: ['./os.component.scss']
 })
-export class RentalComponent implements OnInit {
+
+export class OsComponent implements OnInit {
   itemsClient: any;
   itemsCars: any;
   itemsEmployee: any;
@@ -17,7 +18,6 @@ export class RentalComponent implements OnInit {
   minDate: Date;
   clients: any;
   bsValue = new Date();
-
   constructor(
     public restService: RestService,
     public router: Router
@@ -30,33 +30,34 @@ export class RentalComponent implements OnInit {
     this.getClient();
 
   }
-  onChangeSelect(idAgency) {
 
-  }
   onSubmit(form) {
     console.log(form);
-    if (this.isEmptyObject(this.itemsClient)) {
-      alert('CPF do cliente não cadastrado');
+    console.log(form.value.clientSelect[0].id);
+
+    if (this.isEmptyObject(this.brandItems)) {
+      alert('Erro a encontrar clientes');
     } else {
       const jsonPost = {};
+      jsonPost['orderDate'] = this.bsValue;
       jsonPost['attendanceDate'] = form.value.endDateInput;
       jsonPost['executionDate'] = form.value.startDateInput;
-      jsonPost['statusOrder'] = this.itemsClient[0].id;
-      jsonPost['brand'] = form.value.selectIdCar;
-      jsonPost['model'] = form.value.selectIdEmployee;
-      jsonPost['defect'] = form.value.selectIdEmployee;
-      jsonPost['obs'] = form.value.selectIdEmployee;
-
+      jsonPost['statusOrder'] = form.value.selectStatus;
+      jsonPost['brand'] = form.value.selectBrand;
+      jsonPost['model'] = form.value.modelInput;
+      jsonPost['defect'] = form.value.defectInput;
+      jsonPost['obs'] = form.value.obsInput;
+      jsonPost['owner'] = form.value.clientSelect[0].id;
       console.log('this.itemsClient.id');
       console.log(this.itemsClient[0].id);
 
       this.restService.post('OrderService', jsonPost).subscribe(os => {
         try {
           if (this.isEmptyObject(os)) {
-            alert('Erro ao criar agencia!');
+            alert('Erro ao criar Ordem de serviço!');
             return false;
           } else {
-            alert('Agência criado!');
+            alert('Ordem de serviço criado!');
             this.router.navigate(['/dashboard']);
 
 
@@ -80,7 +81,7 @@ export class RentalComponent implements OnInit {
   }
   get listClient() {
     return this.itemsClient ? this.itemsClient.map(item => {
-      return { id: item.id, text: (item.street + ' / ' + item.name + ' ' + item.lastName + ' / ' + item.phone)};
+      return { id: item.id, text: ( item.phone + ' / ' + item.name + ' ' + item.lastName + ' / ' + item.street)};
     }) : [];
   }
 
